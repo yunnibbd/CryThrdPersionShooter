@@ -1,0 +1,21 @@
+<Graph Description="" Group="" enabled="1" MultiPlayer="ClientServer">
+ <Nodes>
+  <Node Id="1" Class="UI:Events:System:OnSystemStarted" pos="-486,-180,0">
+   <Inputs Port="-1" Idx=""/>
+  </Node>
+  <Node Id="3" Class="Crymium:CrymiumContailer" pos="-72,-180,0">
+   <Inputs UIName="MainMenu" ShowInEditor="0"/>
+  </Node>
+  <Node Id="4" Class="Game:Start" pos="-648,0,0">
+   <Inputs InGame="1" InEditor="1"/>
+  </Node>
+  <Node Id="5" Class="Crymium:CrymiumContailer" pos="-342,-18,0">
+   <Inputs UIName="SimpleUI" ShowInEditor="1"/>
+  </Node>
+ </Nodes>
+ <Edges>
+  <Edge nodeIn="3" nodeOut="1" portIn="Show" portOut="onEvent" enabled="1"/>
+  <Edge nodeIn="5" nodeOut="4" portIn="Show" portOut="output" enabled="1"/>
+ </Edges>
+ <GraphTokens />
+</Graph>
