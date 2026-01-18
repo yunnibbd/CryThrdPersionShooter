@@ -40,17 +40,12 @@
   <link rel="stylesheet" type="text/css" href="style-mobile.25fc5.css"/>
   <link rel="icon" href="favicon.8de18.ico"/>
 </head>
-<body>
+<body style="background-color: transparent !important;">
   <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
-  <div id="splash">
-    <div class="progress-bar stripes">
-      <span style="width: 0%"></span>
-    </div>
-  </div>
 
-<script src="src/settings.65fae.js" charset="utf-8"></script>
+<script src="src/settings.79e85.js" charset="utf-8"></script>
 
-<script src="main.b5033.js" charset="utf-8"></script>
+<script src="main.57597.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 (function () {
@@ -60,8 +55,6 @@
     }
 
     var debug = window._CCSettings.debug;
-    var splash = document.getElementById('splash');
-    splash.style.display = 'block';
 
     function loadScript (moduleName, cb) {
       function scriptLoaded () {
@@ -85,6 +78,11 @@
       }
     });
 })();
+</script>
+<script>
+  function updateAmmo(num){
+    callGlobal("updateAmmo", Number(num));
+  }
 </script>
 </body>
 </html>

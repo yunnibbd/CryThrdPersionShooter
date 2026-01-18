@@ -57,11 +57,11 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 		if (!gEnv->IsEditor())
 		{
 			// Load the example map in client server mode
-			ICrymiumContainer* crymiumContainer = gEnv->pSystem->GetIPluginManager()
+			m_pCrymiumContainer = gEnv->pSystem->GetIPluginManager()
 				->QueryPlugin<ICrymiumPlugin>()
 				->GetCrymiumContainer();
-			m_pCefQueryHandler = new CGameCefQueryHandler(crymiumContainer);
-			crymiumContainer->Add(m_pCefQueryHandler);
+			m_pCefQueryHandler = new CGameCefQueryHandler(m_pCrymiumContainer);
+			m_pCrymiumContainer->Add(m_pCefQueryHandler);
 		}
 	}
 	break;
@@ -122,7 +122,9 @@ bool CGamePlugin::OnClientConnectionReceived(int channelId, bool bIsReset)
 		pPlayerEntity->GetNetEntity()->SetChannelId(channelId);
 
 		// Create the player component instance
-		CPlayerComponent* pPlayer = pPlayerEntity->GetOrCreateComponentClass<CPlayerComponent>();
+		CPlayerComponent* pPlayer = pPlayerEntity->GetOrCreateComponentClass<CPlayerComponent>(
+			m_pCrymiumContainer->GetJavaScriptFunctionExecutor()
+		);
 
 		if (pPlayer != nullptr)
 		{

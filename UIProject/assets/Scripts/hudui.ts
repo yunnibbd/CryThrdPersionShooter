@@ -6,7 +6,7 @@ export default class HUDUI extends cc.Component {
     public static Instance:HUDUI = null;
 
     // 最大弹药数量
-    private m_maxAmmo = 0;
+    private m_maxAmmo = 12;
 
     @property(cc.Sprite)
     private hudImg:cc.Sprite = null;
@@ -17,6 +17,7 @@ export default class HUDUI extends cc.Component {
     protected onLoad(): void {
         if (HUDUI.Instance == null) {
             HUDUI.Instance = this;
+            this.updateAmmo(this.m_maxAmmo);
         }
     }
 

@@ -58,6 +58,10 @@ void CPlayerComponent::Initialize()
 	
 	// Register the RemoteReviveOnClient function as a Remote Method Invocation (RMI) that can be executed by the server on clients
 	SRmi<RMI_WRAP(&CPlayerComponent::RemoteReviveOnClient)>::Register(this, eRAT_NoAttach, false, eNRT_ReliableOrdered);
+
+	m_maxAmmo = 12;
+	m_avaliableAmmo = m_maxAmmo;
+	m_isReloading = false;
 }
 
 void CPlayerComponent::InitializeLocalPlayer()
@@ -101,7 +105,7 @@ void CPlayerComponent::InitializeLocalPlayer()
 			{
 				IAttachment* pBarrelOutAttachment = pCharacter->GetIAttachmentManager()->GetInterfaceByName("barrel_out");
 
-				if (pBarrelOutAttachment != nullptr)
+				if (!m_isReloading && pBarrelOutAttachment != nullptr)
 				{
 					QuatTS bulletOrigin = pBarrelOutAttachment->GetAttWorldAbsolute();
 
@@ -119,6 +123,16 @@ void CPlayerComponent::InitializeLocalPlayer()
 					{
 						// See Bullet.cpp, bullet is propelled in  the rotation and position the entity was spawned with
 						pEntity->CreateComponentClass<CBulletComponent>();
+					}
+
+					m_avaliableAmmo--;
+					auto callJsParams = std::vector<std::string>();
+					callJsParams.push_back(std::to_string(m_avaliableAmmo));
+					m_pJavaScriptFunctionExecutor->Execute("updateAmmo", callJsParams);
+					if (m_avaliableAmmo <= 0)
+					{
+						m_isReloading = true;
+						m_lastReloadTimeSeconds = gEnv->pTimer->GetFrameStartTime().GetSeconds();
 					}
 				}
 			}
@@ -151,7 +165,7 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 		// Don't update the player if we haven't spawned yet
 		if(!m_isAlive)
 			return;
-		
+
 		const float frameTime = event.fParam[0];
 
 		// Start by updating the movement request we want to send to the character controller
@@ -168,6 +182,18 @@ void CPlayerComponent::ProcessEvent(const SEntityEvent& event)
 		{
 			// Update the camera component offset
 			UpdateCamera(frameTime);
+		}
+
+		if (m_isReloading)
+		{
+			if (gEnv->pTimer->GetFrameStartTime().GetSeconds() - m_lastReloadTimeSeconds >= 2)
+			{
+				m_avaliableAmmo = m_maxAmmo;
+				m_isReloading = false;
+				auto callJsParams = std::vector<std::string>();
+				callJsParams.push_back(std::to_string(m_avaliableAmmo));
+				m_pJavaScriptFunctionExecutor->Execute("updateAmmo", callJsParams);
+			}
 		}
 	}
 	break;

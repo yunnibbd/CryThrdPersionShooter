@@ -91,6 +91,10 @@ class CPlayerComponent final : public IEntityComponent
 
 public:
 	CPlayerComponent() = default;
+	CPlayerComponent(IJavaScriptFunctionExecutor* pJavaScriptFunctionExecutor)
+		: m_pJavaScriptFunctionExecutor(pJavaScriptFunctionExecutor)
+	{
+	}
 	virtual ~CPlayerComponent() {}
 
 	// IEntityComponent
@@ -170,4 +174,12 @@ protected:
 	Quat m_lookOrientation; //!< Should translate to head orientation in the future
 	float m_horizontalAngularVelocity;
 	MovingAverage<float, 10> m_averagedHorizontalAngularVelocity;
+
+private:
+	int m_maxAmmo;
+	int m_avaliableAmmo;
+	bool m_isReloading;
+	bool m_lastReloadTimeSeconds;
+
+	IJavaScriptFunctionExecutor* m_pJavaScriptFunctionExecutor;
 };
