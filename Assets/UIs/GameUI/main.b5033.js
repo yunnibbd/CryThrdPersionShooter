@@ -30,7 +30,7 @@ window.boot = function () {
         cc.view.resizeWithBrowserSize(true);
 
         if (cc.sys.isBrowser) {
-            //setLoadingDisplay();
+            setLoadingDisplay();
         }
 
         if (cc.sys.isMobile) {
@@ -108,7 +108,6 @@ window.boot = function () {
         count++;
         if (count === bundleRoot.length + 1) {
             cc.assetManager.loadBundle(MAIN, function (err) {
-                cc.macro.ENABLE_TRANSPARENT_CANVAS = true;
                 if (!err) cc.game.run(option, onStart);
             });
         }
@@ -124,7 +123,7 @@ window.boot = function () {
 if (window.jsb) {
     var isRuntime = (typeof loadRuntime === 'function');
     if (isRuntime) {
-        require('src/settings.31235.js');
+        require('src/settings.65fae.js');
         require('src/cocos2d-runtime.js');
         if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
             require('src/physics.js');
@@ -132,7 +131,7 @@ if (window.jsb) {
         require('jsb-adapter/engine/index.js');
     }
     else {
-        require('src/settings.31235.js');
+        require('src/settings.65fae.js');
         require('src/cocos2d-jsb.js');
         if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
             require('src/physics.js');
