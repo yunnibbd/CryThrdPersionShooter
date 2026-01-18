@@ -51,6 +51,8 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 		// Listen for client connection events, in order to create the local player
 		gEnv->pGameFramework->AddNetworkedClientListener(*this);
 
+		gEnv->pInput->ShowCursor(true);
+
 		// Don't need to load the map in editor
 		if (!gEnv->IsEditor())
 		{

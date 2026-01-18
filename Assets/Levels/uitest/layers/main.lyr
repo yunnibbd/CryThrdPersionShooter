@@ -1,0 +1,23 @@
+<ObjectLayer>
+ <Layer Name="Main" FullName="Main" GUID="372e2e21-0724-1d8d-7b9f-aafbad6d46e2" Hidden="0" Frozen="0" Expanded="0" Type="0" Exportable="1" ExportLayerPak="1" DefaultLoaded="0" HavePhysics="1" IsDefaultColor="1" Color="4671303" Timestamp="1768732445">
+  <LayerObjects>
+   <Object Type="TagPoint" Layer="Main" LayerGUID="372e2e21-0724-1d8d-7b9f-aafbad6d46e2" Id="36c7c722-91dd-a334-7979-80a1e152fb5e" Name="FG_main" Pos="507.78671,515.88995,31.999756" Rotate="1,0,0,0" Scale="1,1,1" ColorRGB="16711680" UseCustomLevelLayerColor="0" MinSpec="0" EntityClass="TagPoint" HasEntity="0">
+    <Properties />
+    <FlowGraph Description="" Group="FG" enabled="1" MultiPlayer="ClientServer">
+     <Nodes>
+      <Node Id="1" Class="Game:Start" pos="-684,-36,0">
+       <Inputs InGame="1" InEditor="1"/>
+      </Node>
+      <Node Id="2" Class="Crymium:CrymiumContailer" pos="-360,-36,0">
+       <Inputs UIName="HUD" ShowInEditor="1"/>
+      </Node>
+     </Nodes>
+     <Edges>
+      <Edge nodeIn="2" nodeOut="1" portIn="Show" portOut="output" enabled="1"/>
+     </Edges>
+     <GraphTokens />
+    </FlowGraph>
+   </Object>
+  </LayerObjects>
+ </Layer>
+</ObjectLayer>

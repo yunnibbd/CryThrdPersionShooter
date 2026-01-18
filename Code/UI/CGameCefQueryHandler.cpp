@@ -19,7 +19,7 @@ void CGameCefQueryHandler::Handle(const std::string& request)
 		if (m_pCrymiumContainer != nullptr)
 		{
 			m_pCrymiumContainer->GetUiCloser()->Close();
-			m_pCrymiumContainer->GetUiActivator()->Activate("SimpleUI");
+			m_pCrymiumContainer->GetUiActivator()->Activate("GameUI");
 		}
 	}
 	else if (request == "quit-game")

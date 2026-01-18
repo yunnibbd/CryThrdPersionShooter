@@ -10,7 +10,7 @@
    <Inputs InGame="1" InEditor="1"/>
   </Node>
   <Node Id="5" Class="Crymium:CrymiumContailer" pos="-342,-18,0">
-   <Inputs UIName="SimpleUI" ShowInEditor="1"/>
+   <Inputs UIName="SimpleUI" ShowInEditor="0"/>
   </Node>
  </Nodes>
  <Edges>
