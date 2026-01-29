@@ -91,10 +91,6 @@ class CPlayerComponent final : public IEntityComponent
 
 public:
 	CPlayerComponent() = default;
-	CPlayerComponent(IJavaScriptFunctionExecutor* pJavaScriptFunctionExecutor)
-		: m_pJavaScriptFunctionExecutor(pJavaScriptFunctionExecutor)
-	{
-	}
 	virtual ~CPlayerComponent() {}
 
 	// IEntityComponent

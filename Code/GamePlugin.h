@@ -66,5 +66,4 @@ protected:
 	std::unordered_map<int, EntityId> m_players;
 
 	ICefQueryHandler* m_pCefQueryHandler = nullptr;
-	ICrymiumContainer* m_pCrymiumContainer = nullptr;
 };

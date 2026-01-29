@@ -19,6 +19,7 @@ add_sources("Code_uber.cpp"
     SOURCE_GROUP "Root"
 		"GamePlugin.cpp"
 		"StdAfx.cpp"
+        "GamePluginEnv.h"
 		"GamePlugin.h"
 		"StdAfx.h"
 )

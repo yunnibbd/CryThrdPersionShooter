@@ -57,15 +57,26 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 		if (!gEnv->IsEditor())
 		{
 			// Load the example map in client server mode
-			m_pCrymiumContainer = gEnv->pSystem->GetIPluginManager()
+			gGamePluginEnv->pCrymiumContainer = gEnv->pSystem->GetIPluginManager()
 				->QueryPlugin<ICrymiumPlugin>()
 				->GetCrymiumContainer();
-			m_pCefQueryHandler = new CGameCefQueryHandler(m_pCrymiumContainer);
-			m_pCrymiumContainer->Add(m_pCefQueryHandler);
+			m_pCefQueryHandler = new CGameCefQueryHandler(gGamePluginEnv->pCrymiumContainer);
+			gGamePluginEnv->pCrymiumContainer->Add(m_pCefQueryHandler);
 		}
 	}
 	break;
-
+	case ESYSTEM_EVENT_LEVEL_LOAD_START:
+	{
+		if (gEnv->IsEditing())
+		{
+			gGamePluginEnv->pCrymiumContainer = gEnv->pSystem->GetIPluginManager()
+				->QueryPlugin<ICrymiumPlugin>()
+				->GetCrymiumContainer();
+			m_pCefQueryHandler = new CGameCefQueryHandler(gGamePluginEnv->pCrymiumContainer);
+			gGamePluginEnv->pCrymiumContainer->Add(m_pCefQueryHandler);
+		}
+	}
+	break;
 	case ESYSTEM_EVENT_REGISTER_SCHEMATYC_ENV:
 	{
 		// Register all components that belong to this plug-in
@@ -122,9 +133,7 @@ bool CGamePlugin::OnClientConnectionReceived(int channelId, bool bIsReset)
 		pPlayerEntity->GetNetEntity()->SetChannelId(channelId);
 
 		// Create the player component instance
-		CPlayerComponent* pPlayer = pPlayerEntity->GetOrCreateComponentClass<CPlayerComponent>(
-			m_pCrymiumContainer->GetJavaScriptFunctionExecutor()
-		);
+		CPlayerComponent* pPlayer = pPlayerEntity->GetOrCreateComponentClass<CPlayerComponent>();
 
 		if (pPlayer != nullptr)
 		{

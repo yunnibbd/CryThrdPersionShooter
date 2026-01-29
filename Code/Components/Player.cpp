@@ -62,6 +62,8 @@ void CPlayerComponent::Initialize()
 	m_maxAmmo = 12;
 	m_avaliableAmmo = m_maxAmmo;
 	m_isReloading = false;
+
+	m_pJavaScriptFunctionExecutor = gGamePluginEnv->pCrymiumContainer->GetJavaScriptFunctionExecutor();
 }
 
 void CPlayerComponent::InitializeLocalPlayer()
