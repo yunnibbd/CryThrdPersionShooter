@@ -77,6 +77,16 @@ void CGamePlugin::OnSystemEvent(ESystemEvent event, UINT_PTR wparam, UINT_PTR lp
 		}
 	}
 	break;
+	case ESYSTEM_EVENT_GAME_MODE_SWITCH_START:
+	{
+		gGamePluginEnv->pCrymiumContainer->GetUiActivator()->Activate("MainMenu");
+	}
+	break;
+	case ESYSTEM_EVENT_GAME_MODE_SWITCH_END:
+	{
+		gGamePluginEnv->pCrymiumContainer->GetUiCloser()->Close();
+	}
+	break;
 	case ESYSTEM_EVENT_REGISTER_SCHEMATYC_ENV:
 	{
 		// Register all components that belong to this plug-in
