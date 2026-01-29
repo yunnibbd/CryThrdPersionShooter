@@ -64,6 +64,14 @@ void CPlayerComponent::Initialize()
 	m_isReloading = false;
 
 	m_pJavaScriptFunctionExecutor = gGamePluginEnv->pCrymiumContainer->GetJavaScriptFunctionExecutor();
+
+	auto setMaxAmmoParameters = std::vector<std::string>();
+	setMaxAmmoParameters.push_back(std::to_string(m_maxAmmo));
+	m_pJavaScriptFunctionExecutor->Execute("setMaxAmmo", setMaxAmmoParameters);
+
+	auto updateAmmoParameters = std::vector<std::string>();
+	updateAmmoParameters.push_back(std::to_string(m_avaliableAmmo));
+	m_pJavaScriptFunctionExecutor->Execute("updateAmmo", updateAmmoParameters);
 }
 
 void CPlayerComponent::InitializeLocalPlayer()

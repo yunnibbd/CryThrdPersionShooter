@@ -15,11 +15,11 @@ void CGameCefQueryHandler::Handle(const std::string& request)
 {
 	if (request == "new-game")
 	{
+		m_pCrymiumContainer->GetUiCloser()->Close();
 		gEnv->pConsole->ExecuteString("map example", false, true);
 		if (m_pCrymiumContainer != nullptr)
 		{
-			m_pCrymiumContainer->GetUiCloser()->Close();
-			m_pCrymiumContainer->GetUiActivator()->Activate("GameUI");
+			m_pCrymiumContainer->GetUiActivator()->Activate("HUD");
 		}
 	}
 	else if (request == "quit-game")

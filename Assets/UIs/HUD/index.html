@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html style="height:100%">
+    <body style="height:100%;margin:0">
+        <div style="height:100%;display:flex;flex-direction:column">
+            <div style="flex:7"></div>
+            <div style="flex:1;display:flex">
+                <div style="flex:1;display:flex">
+                    <div style="flex:3;display:flex;padding:20px">
+                        <div id="ammo-meter-available" style="height:100%;background-color:green"></div>
+                        <div id="ammo-meter-used" style="height:100%;background-color:red"></div>
+                    </div>
+                    <div id="ammo-counter" style="flex:1;display:flex;justify-content:center;align-items:center;font-size:xx-large"></div>
+                </div>
+                <div style="flex:2"></div>
+            </div>
+        </div>
+        <script>
+            var maxAmmo = 0;
+            var availableAmmo = 0;
+            var usedAmmo = 0;
+
+            var ammoMeterAvailableElement = document.getElementById("ammo-meter-available");
+            var ammoMeterUsedElement = document.getElementById("ammo-meter-used");
+            var ammoCounterElement = document.getElementById("ammo-counter");
+            
+            function setMaxAmmo(newMaxAmmo) {
+                maxAmmo = newMaxAmmo;
+            }
+
+            function updateAmmo(newAvailableAmmo) {
+                usedAmmo = maxAmmo - newAvailableAmmo;
+                availableAmmo = newAvailableAmmo;
+
+                ammoMeterAvailableElement.style.flex = availableAmmo;
+                ammoMeterUsedElement.style.flex = usedAmmo;
+
+                ammoCounterElement.innerHTML = availableAmmo + '/' + maxAmmo;
+            }
+	</script>
+    </body>
+</html>
